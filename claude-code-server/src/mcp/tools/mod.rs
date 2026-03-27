@@ -25,7 +25,7 @@ pub async fn dispatch_tool(
         // IDE tools not supported in Zed - return graceful response
         "openDiff" | "openFile" | "getOpenEditors" | "closeAllDiffTabs" | "close_tab"
         | "checkDocumentDirty" | "saveDocument" | "echo" | "get_workspace_info"
-        | "executeCode" => {
+        | "executeCode" | "set_permission_mode" => {
             not_supported_response(tool_name)
         }
 

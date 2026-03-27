@@ -16,6 +16,7 @@ impl MCPServer {
 
         let result = match request.method.as_str() {
             "initialize" => self.handle_initialize(request.params).await?,
+            "ping" => serde_json::json!({}),
             "tools/list" => self.handle_tools_list().await?,
             "tools/call" => self.handle_tools_call(request.params).await?,
             "logging/setLevel" => self.handle_logging_set_level(request.params).await?,

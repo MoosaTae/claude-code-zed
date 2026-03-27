@@ -200,7 +200,7 @@ async fn create_lock_file(port: u16, worktree: Option<PathBuf>, auth_token: &str
     let lock_file_data = LockFile {
         pid: process::id(),
         workspace_folders: vec![workspace_folder],
-        ide_name: "Zed".to_string(),
+        ide_name: "WebStorm".to_string(),
         transport: "ws".to_string(),
         running_in_windows: false,
         auth_token: auth_token.to_string(),
@@ -338,11 +338,9 @@ async fn handle_websocket_message(
                         info!("Processing MCP request: {}", mcp_request.method);
 
                         // Handle notifications (requests without ID) separately
-                        if mcp_request.id.is_none()
-                            && mcp_request.method.starts_with("notifications/")
-                        {
+                        if mcp_request.id.is_none() {
                             info!("Processing notification: {}", mcp_request.method);
-                            // Notifications don't get responses, just return
+                            // JSON-RPC 2.0: messages without id are notifications, no response
                             return Ok(());
                         }
 
